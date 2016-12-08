@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/rath-prak/PokeBot/issues"
   },
-  "homepage": "https://github.com/rath-prak/PokeBot#readme"
+  "homepage": "https://github.com/rath-prak/PokeBot#readme",
+  "devDependencies": {
+    "ngrok": "^2.2.4"
+  },
+  "dependencies": {
+    "botbuilder": "^3.4.4",
+    "recastai": "^2.3.0",
+    "restify": "^4.3.0"
+  }
 }
