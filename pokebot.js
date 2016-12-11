@@ -1,3 +1,6 @@
+const getGreetings = require('./intents/greetings.js')
+const getInfoPokemon = require('./intents/infopokemon.js')
+
 const config = require('./config.js')
 const restify = require('restify')
 const builder = require('botbuilder')
@@ -12,12 +15,26 @@ const connector = new builder.ChatConnector({
 })
 const bot = new builder.UniversalBot(connector)
 
+const INTENTS = {
+	greetings: getGreetings,
+	infopokemon: getInfoPokemon,
+}
+
 // Event when Message received
 bot.dialog('/', (session) => {
-  recastClient.textRequest(session.message.text)
-  .then(res => console.log(res))
-  .catch(() => session.send('I need some sleep right now... Talk to me later!'))
+	  recastClient.textRequest(session.message.text)
+	 .then(res => {
+	   const intent = res.intent()
+	   const entity = res.get('pokemon')
+	   if(intent) {
+	   	session.send(INTENTS[intent.slug](entity))
+	   }
+	   
+	   // session.send(`Entity: ${entity.name}`)
+	 })
+	 .catch(() => session.send('I need some sleep right now... Talk to me later!'))
 })
+
 
 // Server Init
 const server = restify.createServer()
