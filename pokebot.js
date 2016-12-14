@@ -17,7 +17,6 @@ const bot = new builder.UniversalBot(connector)
 
 const INTENTS = {
 	greetings: getGreetings,
-	infopokemon: getInfoPokemon,
 }
 
 // Event when Message received
